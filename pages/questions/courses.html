@@ -21,9 +21,7 @@
       >
         <i class="bx bx-chevron-left text-2xl"></i>
       </button>
-      <h2 class="text-sm font-semibold">
-        <span class="text-gray-400">Materials</span> - Courses
-      </h2>
+      <h2 class="text-sm font-semibold">>Courses</h2>
     </header>
 
     <section class="mt-6">
@@ -36,84 +34,6 @@
       </div>
     </section>
 
-    <script>
-      const courses = {
-        100: {
-          firstSemester: [
-            {
-              name: "MAT 101 (Calculus)",
-              fileId: "1NuYk01qf2dvdDQbPAxKsyAT_u7WXoiBD", // Replace with your actual Google Drive file ID
-            },
-            {
-              name: "PHY 101 (Physics)",
-              fileId: "1O7CZyqk1TLz8Jg5rZBdJftavScg9MbzK", // Replace with your actual Google Drive file ID
-            },
-            {
-              name: "CSC 101 (Introduction to Computing)",
-              fileId: "1bT9W4cScE8BxErGF_p3TbR6Fw3FTCOYJ", // Replace with your actual Google Drive file ID
-            },
-          ],
-          secondSemester: [
-            {
-              name: "MAT 102 (Algebra)",
-              fileId: "1A3cFKN6XWlgnlmWmyTKOeSKa1hb2kAR0",
-            },
-            {
-              name: "PHY 102 (Mechanics)",
-              fileId: "1rbIJ5a2BOxGv9Wg2HgQY8yKEn9mw5pwb",
-            },
-            {
-              name: "CSC 102 (Programming Basics)",
-              fileId: "1XyNLOcu8BtkC57wMPuN2qYUnKX5fv_vz",
-            },
-          ],
-        },
-        // Add other levels as needed
-      };
-
-      const params = new URLSearchParams(window.location.search);
-      const level = params.get("level");
-
-      if (courses[level]) {
-        document.querySelector("h2").textContent += ` - ${level} Level`;
-
-        const firstSemester = courses[level].firstSemester
-          .map(
-            (course) =>
-              `<a href="view.html?name=${encodeURIComponent(
-                course.name
-              )}&fileId=${
-                course.fileId
-              }" class="px-6 flex items-center gap-4 bg-white p-4 rounded-lg active:bg-gray-100">
-                  <p class="text-xs font-medium">${course.name}</p>
-                </a>`
-          )
-          .join("");
-
-        const secondSemester = courses[level].secondSemester
-          .map(
-            (course) =>
-              `<a href="view.html?name=${encodeURIComponent(
-                course.name
-              )}&fileId=${
-                course.fileId
-              }" class="px-6 flex items-center gap-4 bg-white p-4 rounded-lg active:bg-gray-100">
-                  <p class="text-xs font-medium">${course.name}</p>
-                </a>`
-          )
-          .join("");
-
-        document
-          .querySelector(".space-y-2:nth-child(1)")
-          .insertAdjacentHTML("beforeend", firstSemester);
-        document
-          .querySelector(".space-y-2:nth-child(2)")
-          .insertAdjacentHTML("beforeend", secondSemester);
-      } else {
-        document.querySelector(
-          "section"
-        ).innerHTML = `<p class="text-center text-gray-500">No courses available for this level.</p>`;
-      }
-    </script>
+    <script src="q-script.js"></script>
   </body>
 </html>
