@@ -15,7 +15,10 @@
     <header
       class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
     >
-      <button class="text-gray-600 hover:text-gray-800"  onclick="window.history.back()">
+      <button
+        class="text-gray-600 hover:text-gray-800"
+        onclick="window.history.back()"
+      >
         <i class="bx bx-chevron-left text-2xl"></i>
       </button>
       <h2 class="text-sm font-semibold" id="course-name"></h2>
@@ -36,8 +39,8 @@
       if (courseName && fileId) {
         document.querySelector("#course-name").textContent = courseName;
 
-        // Construct the Google Drive viewer link
-        const fileUrl = `https://drive.google.com/file/d/${fileId}/view`;
+        // Construct the Google Drive viewer link using /preview
+        const fileUrl = `https://drive.google.com/file/d/${fileId}/preview`;
         document.querySelector("#pdf-viewer").src = fileUrl;
       } else {
         document.querySelector(
