@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css">
+    <title>NACOS App</title>
+  </head>
+  <body class="text-gray-800">
+    <header
+      class="flex justify-between items-center bg-white py-4 px-4 border"
+    >
+      <h2 class="text-sm font-semibold">Home</h2>
+      <button class="text-gray-600 active:text-blue-500">
+        <i class="bx bx-bell text-2xl"></i>
+      </button>
+    </header>
+
+    <section class="px-4 mt-6">
+      <h1 class="text-xl font-semibold">Welcome, Nelson!</h1>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="px-4 mt-6">
+      <div
+        class="h-40 bg-gradient-to-r from-gray-500 via-gray-400 to-gray-500 rounded-lg shadow-lg flex items-center justify-center text-white"
+      >
+        <h3 class="text-lg font-semibold">Explore Your Resources</h3>
+      </div>
+    </section>
+
+    <!-- Pages Section -->
+    <section class="px-4 mt-10">
+      <h2 class="text-sm font-semibold mb-4">Pages</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div
+          class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
+        >
+          <i class="bx bx-book-content text-2xl text-blue-500"></i>
+          <p class="mt-2 text-xs font-medium">Materials</p>
+        </div>
+        <div
+          class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
+        >
+          <i class="bx bx-calendar text-2xl text-purple-500"></i>
+          <p class="mt-2 text-xs font-medium">Timetable</p>
+        </div>
+        <div
+          class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
+        >
+          <i class="bx bx-message-square-dots text-2xl text-green-500"></i>
+          <p class="mt-2 text-xs font-medium">Send Feedback</p>
+        </div>
+        <div
+          class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
+        >
+          <i class="bx bx-search-alt text-2xl text-pink-500"></i>
+          <p class="mt-2 text-xs font-medium">Search</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Navigation -->
+    <footer class="fixed bottom-0 w-full bg-white border-t py-3 px-6 shadow-md">
+      <nav class="flex justify-around">
+        <a
+          href="/"
+          class="active flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-home-alt-2"></i>
+          <span class="">Home</span>
+        </a>
+        <a
+          href="/pages/materials.html"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-book-content"></i>
+          <span class="">Materials</span>
+        </a>
+        <a
+          href="/pages/timetable.html"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-calendar"></i>
+          <span class="">Timetable</span>
+        </a>
+        <a
+          href="/pages/questions.html"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-file"></i>
+          <span class="">Questions</span>
+        </a>
+      </nav>
+    </footer>
+  </body>
+</html>

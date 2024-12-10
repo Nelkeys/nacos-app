@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Course Material</title>
+  </head>
+  <body class="text-gray-800">
+    <header
+      class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
+    >
+      <button class="text-gray-600 hover:text-gray-800"  onclick="window.history.back()">
+        <i class="bx bx-chevron-left text-2xl"></i>
+      </button>
+      <h2 class="text-sm font-semibold" id="course-name"></h2>
+    </header>
+
+    <section class="mt-6">
+      <div class="px-4 py-6">
+        <!-- Google Drive Embed will be injected here -->
+        <iframe id="pdf-viewer" src="" width="100%" height="600px"></iframe>
+      </div>
+    </section>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const courseName = params.get("name");
+      const fileId = params.get("fileId");
+
+      if (courseName && fileId) {
+        document.querySelector("#course-name").textContent = courseName;
+
+        // Construct the Google Drive viewer link
+        const fileUrl = `https://drive.google.com/file/d/${fileId}/view`;
+        document.querySelector("#pdf-viewer").src = fileUrl;
+      } else {
+        document.querySelector(
+          "section"
+        ).innerHTML = `<p class="text-center text-gray-500">No document available.</p>`;
+      }
+    </script>
+  </body>
+</html>
