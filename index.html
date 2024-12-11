@@ -8,13 +8,11 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <title>NACOS App</title>
   </head>
   <body class="text-gray-800">
-    <header
-      class="flex justify-between items-center bg-white py-4 px-4 border"
-    >
+    <header class="flex justify-between items-center bg-white py-4 px-4 border">
       <h2 class="text-sm font-semibold">Home</h2>
       <button class="text-gray-600 active:text-blue-500">
         <i class="bx bx-bell text-2xl"></i>
@@ -28,39 +26,46 @@
     <!-- Banner Section -->
     <section class="px-4 mt-6">
       <div
-        class="h-40 bg-gradient-to-r from-gray-500 via-gray-400 to-gray-500 rounded-lg shadow-lg flex items-center justify-center text-white"
+        class="h-40 relative rounded-lg shadow-lg flex items-center justify-center text-white custom-bg bg-gray-900"
       >
-        <h3 class="text-lg font-semibold">Explore Your Resources</h3>
+        <!-- <div class="absolute inset-0 bg-black opacity-60 rounded-lg"></div> -->
+
+        <div class="relative text-lg font-semibold z-10 flex items-center gap-4">
+          <i class="bx bxl-sketch text-2xl"></i>
+          <h3>Explore Your Resources</h3>
+        </div>
       </div>
     </section>
 
     <!-- Pages Section -->
     <section class="px-4 mt-10">
-      <h2 class="text-sm font-semibold mb-4">Pages</h2>
+      <h2 class="text-sm font-semibold mb-4">Quick Links</h2>
       <div class="grid grid-cols-2 gap-4">
-        <div
+        <a
+          href="/materials"
           class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
         >
           <i class="bx bx-book-content text-2xl text-blue-500"></i>
           <p class="mt-2 text-xs font-medium">Materials</p>
-        </div>
-        <div
+        </a>
+        <a
+          href="/timetable.html"
           class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
         >
           <i class="bx bx-calendar text-2xl text-purple-500"></i>
           <p class="mt-2 text-xs font-medium">Timetable</p>
-        </div>
+        </a>
         <div
           class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
         >
           <i class="bx bx-message-square-dots text-2xl text-green-500"></i>
-          <p class="mt-2 text-xs font-medium">Send Feedback</p>
+          <p class="mt-2 text-xs font-medium">NACOS Academia</p>
         </div>
         <div
           class="bg-white shadow-md rounded-lg flex flex-col items-center justify-center py-6 active:bg-gray-100 border"
         >
           <i class="bx bx-search-alt text-2xl text-pink-500"></i>
-          <p class="mt-2 text-xs font-medium">Search</p>
+          <p class="mt-2 text-xs font-medium">NACOS AKSU Website</p>
         </div>
       </div>
     </section>
@@ -73,24 +78,24 @@
           class="active flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-home-alt-2"></i>
-          <span class="">Home</span>
+          <span class="/">Home</span>
         </a>
         <a
-          href="/pages/materials.html"
+          href="/materials"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-book-content"></i>
           <span class="">Materials</span>
         </a>
         <a
-          href="/pages/timetable.html"
+          href="/timetable"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-calendar"></i>
           <span class="">Timetable</span>
         </a>
         <a
-          href="/pages/questions.html"
+          href="/questions"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-file"></i>

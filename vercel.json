@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/material",
+      "destination": "/pages/materials.html"
+    },
+    {
+      "source": "/questions",
+      "destination": "/pages/questions.html"
+    },
+    {
+      "source": "/timetable",
+      "destination": "/pages/timetable.html"
+    }
+  ]
+}

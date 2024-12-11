@@ -12,12 +12,12 @@ header i {
 .page-box p {
   font-size: 12px;
 }
-footer nav a i{
+footer nav a i {
   font-size: 20px !important;
 }
 footer nav a span {
   font-size: 10px !important;
 }
-footer nav .active{
+footer nav .active {
   color: #2196f3;
 }

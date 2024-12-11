@@ -9,31 +9,33 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Materials</title>
+    <title>Past Questions</title>
   </head>
   <body class="text-gray-800">
-    <header
-      class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
-    >
+    <header class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm">
       <button
         class="text-gray-600 hover:text-gray-800"
         onclick="window.history.back()"
       >
         <i class="bx bx-chevron-left text-2xl"></i>
       </button>
-      <h2 class="text-sm font-semibold">>Courses</h2>
+      <h2 class="text-sm font-semibold">Courses</h2>
     </header>
 
     <section class="mt-6">
+      <!-- First Semester -->
       <div class="space-y-2">
         <h1 class="text-sm font-bold px-4">1st Semester</h1>
+        <div id="first-semester-container" class="space-y-2"></div>
       </div>
 
+      <!-- Second Semester -->
       <div class="space-y-2 mt-8">
         <h1 class="text-sm font-bold px-4">2nd Semester</h1>
+        <div id="second-semester-container" class="space-y-2"></div>
       </div>
     </section>
 
-    <script src="q-script.js"></script>
+    <script src="q-script.js" type="module"></script>
   </body>
 </html>
