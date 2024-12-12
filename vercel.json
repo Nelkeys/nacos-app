@@ -1,12 +1,12 @@
 {
-  "rewrites": [
-    {
-      "source": "/materials",
-      "destination": "/pages/materials.html"
-    },
+  "rewrites": [ 
     {
       "source": "/questions",
       "destination": "/pages/questions.html"
+    },
+    {
+      "source": "/materials",
+      "destination": "/pages/materials.html"
     },
     {
       "source": "/timetable",
