@@ -1,7 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/material",
+      "source": "/materials",
       "destination": "/pages/materials.html"
     },
     {
