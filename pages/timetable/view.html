@@ -38,7 +38,9 @@
 
       if (level && timeId) {
         // Set the header text to the level
-        document.querySelector("#level").textContent = `${level} Level Timetable`;
+        document.querySelector(
+          "#level"
+        ).textContent = `${level} Level Timetable`;
 
         // Construct the Google Drive viewer link for the timetable
         const fileUrl = `https://drive.google.com/file/d/${timeId}/preview`;
