@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -15,7 +18,6 @@
     <header
       class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
     >
-
       <h2 class="text-sm font-semibold">Materials</h2>
     </header>
 
@@ -120,13 +122,17 @@
       }
     </script>
 
+    <!-- loader -->
+    <div
+      id="dimmed-overlay"
+      class="hidden fixed inset-0 bg-black bg-opacity-30 z-40"
+    ></div>
+    <div
+      id="top-loader"
+      class="hidden fixed top-0 left-0 h-1 bg-blue-500 z-50"
+    ></div>
+    <!-- loader end  -->
 
-<!-- loader -->
-<div id="loader" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
-  <div class="loader"></div>
-</div>
-<!-- loader end  -->
-
-<script src="/loader.js"></script>
+    <script src="/loader.js"></script>
   </body>
 </html>
