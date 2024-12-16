@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -12,7 +15,9 @@
     <title>Past Questions</title>
   </head>
   <body class="text-gray-800">
-    <header class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm">
+    <header
+      class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
+    >
       <button
         class="text-gray-600 hover:text-gray-800"
         onclick="window.history.back()"
@@ -37,5 +42,16 @@
     </section>
 
     <script src="q-script.js" type="module"></script>
+
+    <!-- loader -->
+    <div
+      id="loader"
+      class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 z-50"
+    >
+      <div class="loader"></div>
+    </div>
+    <!-- loader end  -->
+
+    <script src="/loader.js"></script>
   </body>
 </html>

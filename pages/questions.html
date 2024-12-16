@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -22,7 +22,7 @@
       <div class="space-y-4">
         <div
           class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md border active:bg-gray-100"
-          onclick="location.href='questions/courses.html?level=100';"
+          onclick="location.href='/pages/questions/courses.html?level=100';"
         >
           <div
             class="rounded-full h-10 w-10 flex items-center justify-center"
@@ -35,7 +35,7 @@
 
         <div
           class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md border active:bg-gray-100"
-          onclick="location.href='questions/courses.html?level=200';"
+          onclick="location.href='/pages/questions/courses.html?level=200';"
         >
           <div
             class="rounded-full h-10 w-10 flex items-center justify-center"
@@ -48,7 +48,7 @@
 
         <div
           class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md border active:bg-gray-100"
-          onclick="location.href='questions/courses.html?level=300';"
+          onclick="location.href='/pages/questions/courses.html?level=300';"
         >
           <div
             class="rounded-full h-10 w-10 flex items-center justify-center"
@@ -61,7 +61,7 @@
 
         <div
           class="flex items-center gap-4 bg-white p-4 rounded-lg shadow-md border active:bg-gray-100"
-          onclick="location.href='questions/courses.html?level=400';"
+          onclick="location.href='/pages/questions/courses.html?level=400';"
         >
           <div
             class="rounded-full h-10 w-10 flex items-center justify-center"
@@ -107,5 +107,14 @@
         </a>
       </nav>
     </footer>
+
+
+    <!-- loader -->
+    <div id="loader" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+      <div class="loader"></div>
+    </div>
+    <!-- loader end  -->
+
+    <script src="/loader.js"></script>
   </body>
 </html>

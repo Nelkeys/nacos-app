@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link rel="stylesheet" href="/css/style.css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -68,5 +68,13 @@
         ).innerHTML = `<p class="text-center text-gray-500">No past questions available.</p>`;
       }
     </script>
+
+    <!-- loader -->
+    <div id="loader" class="hidden fixed inset-0 flex items-center justify-center bg-gray-100 z-50">
+      <div class="loader"></div>
+    </div>
+    <!-- loader end  -->
+
+    <script src="/loader.js"></script>
   </body>
 </html>
