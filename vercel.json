@@ -11,6 +11,10 @@
     {
       "source": "/timetable",
       "destination": "/pages/timetable.html"
+    },
+    {
+      "source": "/notifications",
+      "destination": "/pages/notifications.html"
     }
   ]
 }

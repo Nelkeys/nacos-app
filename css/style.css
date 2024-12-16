@@ -22,7 +22,6 @@ footer nav .active {
   color: #2196f3;
 }
 
-/* loader settings */
 /* Top loader bar styling */
 #top-loader {
   width: 0%;
@@ -46,4 +45,3 @@ footer nav .active {
 .hidden {
   display: none;
 }
-

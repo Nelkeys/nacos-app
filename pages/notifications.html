@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Past Questions</title>
+  </head>
+  <body class="text-gray-800">
+    <header class="flex justify-between items-center bg-white py-4 px-4 border">
+      <h2 class="text-sm font-semibold">Notifications</h2>
+      <button class="text-blue-500">
+        <i class="bx bxs-bell text-2xl"></i>
+      </button>
+    </header>
+
+    <div>
+      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
+        <div class="w-[10%]">
+          <i class="bx bx-envelope text-2xl text-gray-500"></i>
+        </div>
+        <div class="space-y-1">
+          <p id="topic" class="text-gray-400 text-xs font-semibold">
+            A2DIGIHUB
+          </p>
+          <p id="descrition" class="text-xs font-semibold">
+            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
+          </p>
+          <p id="time" class="text-xs text-gray-400">12 Dec</p>
+        </div>
+      </div>
+
+      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
+        <div class="w-[10%]">
+          <i class="bx bx-envelope text-2xl text-gray-500"></i>
+        </div>
+        <div class="space-y-1">
+          <p id="topic" class="text-gray-400 text-xs font-semibold">
+            A2DIGIHUB
+          </p>
+          <p id="descrition" class="text-xs font-semibold">
+            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
+          </p>
+          <p id="time" class="text-xs text-gray-400">12 Dec</p>
+        </div>
+      </div>
+
+      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
+        <div class="w-[10%]">
+          <i class="bx bx-envelope text-2xl text-gray-500"></i>
+        </div>
+        <div class="space-y-1">
+          <p id="topic" class="text-gray-400 text-xs font-semibold">
+            A2DIGIHUB
+          </p>
+          <p id="descrition" class="text-xs font-semibold">
+            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
+          </p>
+          <p id="time" class="text-xs text-gray-400">12 Dec</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Navigation -->
+    <footer class="fixed bottom-0 w-full bg-white border-t py-3 px-6 shadow-md">
+      <nav class="flex justify-around">
+        <a
+          href="/"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-home-alt-2"></i>
+          <span class="">Home</span>
+        </a>
+        <a
+          href="/materials"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-book-content"></i>
+          <span class="">Materials</span>
+        </a>
+        <a
+          href="/timetable"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-calendar"></i>
+          <span class="">Timetable</span>
+        </a>
+        <a
+          href="/questions"
+          class="flex flex-col items-center text-gray-600 active:text-blue-500"
+        >
+          <i class="bx bxs-file"></i>
+          <span class="">Questions</span>
+        </a>
+      </nav>
+    </footer>
+
+    <!-- loader -->
+    <!-- loader -->
+    <div
+      id="dimmed-overlay"
+      class="hidden fixed inset-0 bg-black bg-opacity-30 z-40"
+    ></div>
+    <div
+      id="top-loader"
+      class="hidden fixed top-0 left-0 h-1 bg-blue-500 z-50"
+    ></div>
+    <!-- loader end  -->
+
+    <script src="/loader.js"></script>
+  </body>
+</html>
