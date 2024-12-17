@@ -12,9 +12,10 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <title>Past Questions</title>
+    <title>Notifications</title>
   </head>
   <body class="text-gray-800">
+    <!-- Header -->
     <header class="flex justify-between items-center bg-white py-4 px-4">
       <h2 class="text-sm font-semibold">Notifications</h2>
       <button class="text-blue-500">
@@ -22,52 +23,8 @@
       </button>
     </header>
 
-    <div class="my-3">
-      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
-        <div class="w-[10%]">
-          <i class="bx bx-envelope text-2xl text-gray-500"></i>
-        </div>
-        <div class="space-y-1">
-          <p id="topic" class="text-gray-400 text-xs font-semibold">
-            A2DIGIHUB
-          </p>
-          <p id="descrition" class="text-xs font-semibold">
-            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
-          </p>
-          <p id="time" class="text-xs text-gray-400">12 Dec</p>
-        </div>
-      </div>
-
-      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
-        <div class="w-[10%]">
-          <i class="bx bx-envelope text-2xl text-gray-500"></i>
-        </div>
-        <div class="space-y-1">
-          <p id="topic" class="text-gray-400 text-xs font-semibold">
-            A2DIGIHUB
-          </p>
-          <p id="descrition" class="text-xs font-semibold">
-            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
-          </p>
-          <p id="time" class="text-xs text-gray-400">12 Dec</p>
-        </div>
-      </div>
-
-      <div class="flex p-4 gap-4 border-b border-gray-300 active:bg-gray-100">
-        <div class="w-[10%]">
-          <i class="bx bx-envelope text-2xl text-gray-500"></i>
-        </div>
-        <div class="space-y-1">
-          <p id="topic" class="text-gray-400 text-xs font-semibold">
-            A2DIGIHUB
-          </p>
-          <p id="descrition" class="text-xs font-semibold">
-            Invitation to join A2DIGIHUB/pharmacy-nextjs from A2DIGIHUB
-          </p>
-          <p id="time" class="text-xs text-gray-400">12 Dec</p>
-        </div>
-      </div>
-    </div>
+    <!-- Notifications Container -->
+    <div id="notifications-container" class="my-3"></div>
 
     <!-- Footer Navigation -->
     <footer class="fixed bottom-0 w-full bg-white border-t py-3 px-6 shadow-md">
@@ -77,44 +34,96 @@
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-home-alt-2"></i>
-          <span class="">Home</span>
+          <span>Home</span>
         </a>
         <a
           href="/materials"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-book-content"></i>
-          <span class="">Materials</span>
+          <span>Materials</span>
         </a>
         <a
           href="/timetable"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-calendar"></i>
-          <span class="">Timetable</span>
+          <span>Timetable</span>
         </a>
         <a
           href="/questions"
           class="flex flex-col items-center text-gray-600 active:text-blue-500"
         >
           <i class="bx bxs-file"></i>
-          <span class="">Questions</span>
+          <span>Questions</span>
         </a>
       </nav>
     </footer>
 
-    <!-- loader -->
-    <!-- loader -->
-    <div
-      id="dimmed-overlay"
-      class="hidden fixed inset-0 bg-black bg-opacity-30 z-40"
-    ></div>
-    <div
-      id="top-loader"
-      class="hidden fixed top-0 left-0 h-1 bg-blue-500 z-50"
-    ></div>
-    <!-- loader end  -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
-    <script src="/loader.js"></script>
+    <!-- Script -->
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBQ4vGjiLjaAG5kIP-IWab441RETilwdks",
+        authDomain: "nacos-app.firebaseapp.com",
+        databaseURL: "https://nacos-app-default-rtdb.firebaseio.com",
+        projectId: "nacos-app",
+        storageBucket: "nacos-app.firebasestorage.app",
+        messagingSenderId: "982514858036",
+        appId: "1:982514858036:web:66e7bb244b772ce65d7261",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Reference to the notifications collection
+      const notificationsRef = db.collection("notifications");
+
+      // Get container where notifications will be displayed
+      const notificationsContainer = document.getElementById(
+        "notifications-container"
+      );
+
+      // Fetch and display notifications
+      function fetchNotifications() {
+        notificationsRef
+          .orderBy("time", "desc") // Sort by time in descending order
+          .onSnapshot((snapshot) => {
+            // Clear container
+            notificationsContainer.innerHTML = "";
+
+            // Loop through each document and render the notification
+            snapshot.forEach((doc) => {
+              const notification = doc.data();
+              const notificationHTML = `
+                <a href="/pages/notification-details.html?id=${doc.id}" class="block">
+                  <div class="flex p-4 gap-4 border-b border-gray-300 hover:bg-gray-100">
+                    <div class="w-[10%]">
+                      <i class="bx bx-envelope text-2xl text-gray-500"></i>
+                    </div>
+                    <div class="space-y-1">
+                      <p class="text-gray-400 text-xs font-semibold">${notification.topic}</p>
+                      <p class="text-xs font-semibold">${notification.description}</p>
+                      <p class="text-xs text-gray-400">${new Date(notification.time.toDate()).toLocaleString()}</p>
+                    </div>
+                  </div>
+                </a>
+              `;
+              notificationsContainer.insertAdjacentHTML(
+                "beforeend",
+                notificationHTML
+              );
+            });
+          });
+      }
+
+      // Fetch notifications on page load
+      fetchNotifications();
+    </script>
   </body>
 </html>
