@@ -45,3 +45,32 @@ footer nav .active {
 .hidden {
   display: none;
 }
+
+#notification-content {
+  padding: 1.5rem; /* Add padding around the content */
+  line-height: 1.6; /* Improve text readability */
+}
+
+#notification-content p {
+  margin-bottom: 1rem; /* Space between paragraphs */
+  color: #4b5563; /* Neutral gray text color */
+}
+
+#notification-content p:last-child {
+  margin-bottom: 0; /* Remove margin for the last paragraph */
+}
+
+#notification-content a {
+  color: #2563eb; /* Blue color for links */
+  text-decoration: none; /* Remove underline for links */
+  font-weight: bold; /* Make links stand out */
+}
+
+#notification-content a:hover {
+  text-decoration: underline; /* Add underline on hover for better UX */
+}
+
+#notification-content strong {
+  color: #111827; /* Slightly darker color for emphasis */
+  font-weight: bold; /* Highlight important text */
+}

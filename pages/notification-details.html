@@ -15,23 +15,21 @@
     <title>Notification Details</title>
   </head>
   <body class="text-gray-800">
-
     <header
-    class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
-  >
-    <button
-      class="text-gray-600 hover:text-gray-800"
-      onclick="window.history.back()"
+      class="flex items-center gap-4 py-4 px-4 border-b bg-white shadow-sm"
     >
-      <i class="bx bx-chevron-left text-2xl"></i>
-    </button>
-    <h2 class="text-sm font-semibold" id="notification-topic"></h2>
-  </header>
+      <button
+        class="text-gray-600 hover:text-gray-800"
+        onclick="window.history.back()"
+      >
+        <i class="bx bx-chevron-left text-2xl"></i>
+      </button>
+      <h2 class="text-sm font-semibold" id="notification-topic"></h2>
+    </header>
 
     <!-- Notification Content -->
     <div id="notification-content" class="my-6 px-4"></div>
 
-  
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
@@ -71,14 +69,21 @@
               const notification = doc.data();
               topicElement.textContent = notification.topic;
               contentElement.innerHTML = `
-                <p class="text-gray-400 text-sm">${new Date(
-                  notification.time.toDate()
-                ).toLocaleString()}</p>
-                <p class="text-gray-700 mt-4">${notification.content}</p>
-              `;
+          <p class="text-gray-400 text-sm">
+            ${new Date(notification.time.toDate()).toLocaleString()}
+          </p>
+          <div class="text-gray-700 mt-4">
+            ${notification.content}
+          </div>
+        `;
             } else {
               contentElement.innerHTML = "<p>Notification not found.</p>";
             }
+          })
+          .catch((error) => {
+            console.error("Error fetching notification:", error);
+            contentElement.innerHTML =
+              "<p>Error loading notification details.</p>";
           });
       }
 
