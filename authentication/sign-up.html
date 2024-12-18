@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <title>Signup Page</title>
+  </head>
+  <body class="px-4 min-h-screen">
+    <!-- Header -->
+    <header class="pt-6 flex items-center">
+      <img src="/assets/logo/logo.png" class="w-14 h-auto" alt="Logo" />
+    </header>
+
+    <!-- Welcome Section -->
+    <section class="mt-12">
+      <h1 class="text-2xl font-semibold text-gray-800">Create an Account</h1>
+      <p class="text-gray-500 mt-2">Join us to unlock your potential</p>
+    </section>
+
+    <!-- Signup Form -->
+    <form
+      action="#"
+      class="flex flex-col space-y-4 mt-8 bg-white"
+    >
+      <!-- Full Name -->
+      <input
+        type="text"
+        name="full_name"
+        id="full_name"
+        class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Full Name"
+      />
+
+      <!-- Registration Number -->
+      <input
+        type="text"
+        name="reg_number"
+        id="reg_number"
+        class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Registration Number"
+      />
+
+      <!-- Email -->
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Email"
+      />
+
+      <!-- Password -->
+      <input
+        type="password"
+        name="password"
+        id="password"
+        class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Password"
+      />
+
+      <!-- Confirm Password -->
+      <input
+        type="password"
+        name="confirm_password"
+        id="confirm_password"
+        class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Confirm Password"
+      />
+
+      <!-- Signup Button -->
+      <button
+        type="submit"
+        class="p-4 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
+      >
+        Sign Up
+      </button>
+
+      <!-- Divider -->
+      <div class="flex items-center justify-between text-gray-400 text-sm mt-4">
+        <hr class="flex-grow border-gray-300" />
+        <span class="mx-4">or</span>
+        <hr class="flex-grow border-gray-300" />
+      </div>
+
+      <!-- Log In Redirect -->
+      <button
+        class="bg-gray-800 text-white p-4 text-sm rounded-lg font-bold hover:bg-gray-900 transition-colors"
+      >
+        Log In Instead
+      </button>
+    </form>
+  </body>
+</html>
