@@ -109,6 +109,11 @@
         getAuth,
         signInWithEmailAndPassword,
       } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
 
       // Firebase Configuration
       const firebaseConfig = {
@@ -124,6 +129,7 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const db = getFirestore(app);
 
       // Show Popup with Message
       function showPopup(message) {
@@ -152,20 +158,32 @@
             );
             const user = userCredential.user;
 
-            // Save user session to localStorage
-            const sessionData = {
-              uid: user.uid,
-              email: user.email,
-            };
-            localStorage.setItem("userSession", JSON.stringify(sessionData));
+            // Fetch user details from Firestore using user.uid
+            const userDocRef = doc(db, "users", user.uid);
+            const userDocSnap = await getDoc(userDocRef);
 
-            // Show success popup
-            showPopup("Login successful! Redirecting...");
+            if (userDocSnap.exists()) {
+              const userData = userDocSnap.data();
+              const fullName = userData.fullName;
 
-            // Redirect to dashboard
-            setTimeout(() => {
-              window.location.href = "/"; // Redirect to dashboard
-            }, 3000);
+              // Save user session to localStorage
+              const sessionData = {
+                uid: user.uid,
+                email: user.email,
+                fullName: fullName, // Store full name as well
+              };
+              localStorage.setItem("userSession", JSON.stringify(sessionData));
+
+              // Show success popup
+              showPopup("Login successful! Redirecting...");
+
+              // Redirect to dashboard
+              setTimeout(() => {
+                window.location.href = "/"; // Redirect to dashboard
+              }, 3000);
+            } else {
+              throw new Error("User data not found!");
+            }
           } catch (error) {
             console.error("Error logging in:", error);
             // Show error popup

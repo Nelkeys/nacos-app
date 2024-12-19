@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="/js/authCheck.js" type="module"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,13 +17,16 @@
   <body class="text-gray-800">
     <header class="flex justify-between items-center bg-white py-4 px-4">
       <h2 class="text-sm font-semibold">NACOS APP</h2>
-      <button class="text-gray-600 active:text-blue-500" onclick="window.location.href = 'notifications'">
+      <button
+        class="text-gray-600 active:text-blue-500"
+        onclick="window.location.href = 'notifications'"
+      >
         <i class="bx bx-bell text-2xl"></i>
       </button>
     </header>
 
     <section class="px-4 mt-6">
-      <h1 class="text-xl font-semibold">Welcome, User!</h1>
+      <h1 class="text-xl font-semibold" id="username"></h1>
     </section>
 
     <!-- Banner Section -->
@@ -121,5 +125,44 @@
     <!-- loader end  -->
 
     <script src="/js/loader.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBQ4vGjiLjaAG5kIP-IWab441RETilwdks",
+        authDomain: "nacos-app.firebaseapp.com",
+        databaseURL: "https://nacos-app-default-rtdb.firebaseio.com",
+        projectId: "nacos-app",
+        storageBucket: "nacos-app.firebasestorage.app",
+        messagingSenderId: "982514858036",
+        appId: "1:982514858036:web:66e7bb244b772ce65d7261",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Check if the user is already logged in (via localStorage)
+      const existingSession = localStorage.getItem("userSession");
+
+      if (existingSession) {
+        const sessionData = JSON.parse(existingSession);
+        const userFullName = sessionData.fullName;
+
+        // Display the user's full name (from localStorage)
+        document.getElementById(
+          "username"
+        ).textContent = `Welcome, ${userFullName}`;
+      } else {
+        // If no session data is found, redirect to the sign-up page
+        window.location.href = "/authentication/sign-up.html";
+      }
+    </script>
   </body>
 </html>
