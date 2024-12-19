@@ -12,7 +12,7 @@
     <title>Signup Page</title>
 
     <style>
-      /* Bouncy Animation */
+      /* Popup Animation */
       @keyframes bounce {
         0% {
           transform: scale(0);
@@ -57,7 +57,7 @@
     </section>
 
     <!-- Signup Form -->
-    <form id="signupForm" class="flex flex-col space-y-4 mt-8 bg-white">
+    <form id="signupForm" class="flex flex-col space-y-4 mt-8">
       <input
         type="text"
         name="full_name"
@@ -102,7 +102,7 @@
         type="submit"
         class="p-4 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
       >
-        Create account
+        Create Account
       </button>
 
       <!-- Divider -->
@@ -112,7 +112,7 @@
         <hr class="flex-grow border-gray-300" />
       </div>
 
-      <!-- Create Account Button -->
+      <!-- Sign In Button -->
       <a
         href="sign-in.html"
         class="bg-gray-800 text-white text-center p-4 text-sm rounded-lg font-bold hover:bg-gray-900 transition-colors"
@@ -127,73 +127,6 @@
     </div>
 
     <!-- Firebase Integration -->
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
-      import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
-      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
-
-      // Firebase Configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyBQ4vGjiLjaAG5kIP-IWab441RETilwdks",
-        authDomain: "nacos-app.firebaseapp.com",
-        databaseURL: "https://nacos-app-default-rtdb.firebaseio.com",
-        projectId: "nacos-app",
-        storageBucket: "nacos-app.firebasestorage.app",
-        messagingSenderId: "982514858036",
-        appId: "1:982514858036:web:66e7bb244b772ce65d7261",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getFirestore(app);
-
-      // Show Popup with Message
-      function showPopup(message) {
-        const popup = document.getElementById("popup");
-        const popupMessage = document.getElementById("popupMessage");
-        popupMessage.innerText = message;
-        popup.classList.add("show");
-        setTimeout(() => popup.classList.remove("show"), 3000);
-      }
-
-      // Handle Form Submission
-      document.getElementById("signupForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const fullName = document.getElementById("full_name").value.trim();
-        const regNumber = document.getElementById("reg_number").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm_password").value;
-
-        // Check if passwords match
-        if (password !== confirmPassword) {
-          showPopup("Passwords do not match!");
-          return;
-        }
-
-        try {
-          // Create user with Firebase Authentication
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
-
-          // Save additional user info to Firestore
-          await addDoc(collection(db, "users"), {
-            uid: user.uid,
-            fullName,
-            regNumber,
-            email,
-          });
-
-          // Show success popup
-          showPopup("Account created successfully!");
-          window.location.href = "sign-in.html"; // Redirect to sign-in page
-        } catch (error) {
-          console.error("Error creating account:", error);
-          showPopup(error.message || "Error creating account. Please try again.");
-        }
-      });
-    </script>
+    <script type="module" src="signup.js"></script>
   </body>
 </html>

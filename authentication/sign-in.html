@@ -57,7 +57,7 @@
     </section>
 
     <!-- Login Form -->
-    <form id="loginForm" class="flex flex-col space-y-4 mt-8 bg-white">
+    <form id="loginForm" class="flex flex-col space-y-4 mt-8">
       <input
         type="email"
         name="email"
@@ -110,11 +110,11 @@
         signInWithEmailAndPassword,
       } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
       import {
-        getFirestore,
-        doc,
-        getDoc,
-      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
-
+        getDatabase,
+        ref,
+        get,
+      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+    
       // Firebase Configuration
       const firebaseConfig = {
         apiKey: "AIzaSyBQ4vGjiLjaAG5kIP-IWab441RETilwdks",
@@ -125,11 +125,12 @@
         messagingSenderId: "982514858036",
         appId: "1:982514858036:web:66e7bb244b772ce65d7261",
       };
-
+    
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-
+      const db = getDatabase(app);
+    
       // Show Popup with Message
       function showPopup(message) {
         const popup = document.getElementById("popup");
@@ -138,16 +139,16 @@
         popup.classList.add("show");
         setTimeout(() => popup.classList.remove("show"), 3000);
       }
-
+    
       // Handle Form Submission
       document
         .getElementById("loginForm")
         .addEventListener("submit", async (e) => {
           e.preventDefault();
-
+    
           const email = document.getElementById("email").value.trim();
           const password = document.getElementById("password").value;
-
+    
           try {
             // Sign in with Firebase Authentication
             const userCredential = await signInWithEmailAndPassword(
@@ -156,72 +157,41 @@
               password
             );
             const user = userCredential.user;
-
-            // Fetch user data from Firestore using the user's UID
-            const db = getFirestore(app); // Initialize Firestore
-            const userRef = doc(db, "users", user.uid); // Reference to the user's document in the "users" collection
-            const userDoc = await getDoc(userRef); // Fetch the document
-
-            if (userDoc.exists()) {
-              const userData = userDoc.data(); // Get the data from the Firestore document
-
-              // Extract user data from Firestore document
-              const fullName = userData.fullName || "User"; // Default to "User" if fullName is not found
-              const regNumber = userData.regNumber || "Not Available"; // Default to "Not Available" if regNumber is not found
-
-              // Log the data
-              console.log("User data from Firestore:", userData);
-
-              // Save user session to localStorage
+    
+            // Fetch user data from Realtime Database under userAuthList
+            const userRef = ref(db, `userAuthList/${user.uid}`);
+            const userSnapshot = await get(userRef);
+    
+            if (userSnapshot.exists()) {
+              const userData = userSnapshot.val();
+              const fullName = userData.fullName || "User";
+              const regNumber = userData.regNumber || "N/A";
+    
+              // Save session
               const sessionData = {
                 uid: user.uid,
                 email: user.email,
-                fullName: fullName, // Full name from Firestore (or default value)
-                regNumber: regNumber, // Registration number from Firestore (or default value)
+                fullName,
+                regNumber,
               };
               localStorage.setItem("userSession", JSON.stringify(sessionData));
-
+    
               // Show success popup
-              showPopup("Login successful! Redirecting...");
-
-              // Redirect to dashboard
+              showPopup(`Welcome, ${fullName}! Redirecting...`);
               setTimeout(() => {
                 window.location.href = "/"; // Redirect to dashboard
               }, 3000);
             } else {
-              // Proceed with login even if user data doesn't exist in Firestore
-              console.log("User data not found in Firestore, proceeding with login.");
-              const sessionData = {
-                uid: user.uid,
-                email: user.email,
-                fullName: "User", // Default to "User" if data is not available
-                regNumber: "Not Available", // Default to "Not Available"
-              };
-              localStorage.setItem("userSession", JSON.stringify(sessionData));
-
-              // Show success popup
-              showPopup("Login successful! Redirecting...");
-
-              // Redirect to dashboard
-              setTimeout(() => {
-                window.location.href = "/"; // Redirect to dashboard
-              }, 3000);
+              throw new Error("User data not found in the database.");
             }
           } catch (error) {
             console.error("Error logging in:", error);
-            // Show error popup
             showPopup(
               error.message || "Invalid credentials. Please try again."
             );
           }
         });
-
-      // Optionally, redirect if user is already logged in
-      const existingSession = localStorage.getItem("userSession");
-      if (existingSession) {
-        alert("You are already logged in!");
-        window.location.href = "/"; // Adjust as needed
-      }
     </script>
+    
   </body>
 </html>
