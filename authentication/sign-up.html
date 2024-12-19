@@ -10,6 +10,39 @@
       rel="stylesheet"
     />
     <title>Signup Page</title>
+
+    <style>
+      /* Bouncy Animation */
+      @keyframes bounce {
+        0% {
+          transform: scale(0);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 20px 40px;
+        border-radius: 8px;
+        font-size: 18px;
+        animation: bounce 0.5s ease-in-out;
+      }
+
+      .popup.show {
+        display: block;
+      }
+    </style>
   </head>
   <body class="px-4 min-h-screen">
     <!-- Header -->
@@ -24,61 +57,52 @@
     </section>
 
     <!-- Signup Form -->
-    <form
-      action="#"
-      class="flex flex-col space-y-4 mt-8 bg-white"
-    >
-      <!-- Full Name -->
+    <form id="signupForm" class="flex flex-col space-y-4 mt-8 bg-white">
       <input
         type="text"
         name="full_name"
         id="full_name"
         class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Full Name"
+        required
       />
-
-      <!-- Registration Number -->
       <input
         type="text"
         name="reg_number"
         id="reg_number"
         class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Registration Number"
+        required
       />
-
-      <!-- Email -->
       <input
         type="email"
         name="email"
         id="email"
         class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Email"
+        required
       />
-
-      <!-- Password -->
       <input
         type="password"
         name="password"
         id="password"
         class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Password"
+        required
       />
-
-      <!-- Confirm Password -->
       <input
         type="password"
         name="confirm_password"
         id="confirm_password"
         class="p-4 text-sm border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Confirm Password"
+        required
       />
-
-      <!-- Signup Button -->
       <button
         type="submit"
         class="p-4 text-sm bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors"
       >
-        Sign Up
+        Create account
       </button>
 
       <!-- Divider -->
@@ -88,12 +112,104 @@
         <hr class="flex-grow border-gray-300" />
       </div>
 
-      <!-- Log In Redirect -->
-      <button
-        class="bg-gray-800 text-white p-4 text-sm rounded-lg font-bold hover:bg-gray-900 transition-colors"
+      <!-- Create Account Button -->
+      <a
+        href="sign-in.html"
+        class="bg-gray-800 text-white text-center p-4 text-sm rounded-lg font-bold hover:bg-gray-900 transition-colors"
       >
-        Log In Instead
-      </button>
+        Sign in
+      </a>
     </form>
+
+    <!-- Popup Notification -->
+    <div id="popup" class="popup">
+      <p id="popupMessage"></p>
+    </div>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-firestore.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
+
+      // Firebase Configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBQ4vGjiLjaAG5kIP-IWab441RETilwdks",
+        authDomain: "nacos-app.firebaseapp.com",
+        databaseURL: "https://nacos-app-default-rtdb.firebaseio.com",
+        projectId: "nacos-app",
+        storageBucket: "nacos-app.firebasestorage.app",
+        messagingSenderId: "982514858036",
+        appId: "1:982514858036:web:66e7bb244b772ce65d7261",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const auth = getAuth(app);
+
+      // Show Popup with Message
+      function showPopup(message) {
+        const popup = document.getElementById("popup");
+        const popupMessage = document.getElementById("popupMessage");
+        popupMessage.innerText = message;
+        popup.classList.add("show");
+        setTimeout(() => popup.classList.remove("show"), 3000);
+      }
+
+      // Handle Form Submission
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const fullName = document.getElementById("full_name").value.trim();
+          const regNumber = document.getElementById("reg_number").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm_password").value;
+
+          if (password !== confirmPassword) {
+            showPopup("Passwords do not match!");
+            return;
+          }
+
+          try {
+            // Create User in Firebase Authentication
+            const userCredential = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            const user = userCredential.user;
+
+            // Save Additional Info in Firestore
+            await addDoc(collection(db, "users"), {
+              uid: user.uid, // Associate Firestore data with Firebase Auth user
+              fullName,
+              regNumber,
+              email,
+            });
+
+            // Show success popup
+            showPopup("Account created successfully!");
+            window.location.href = "sign-in.html"; // Redirect to sign-in page
+          } catch (error) {
+            console.error("Error creating account:", error);
+            // Show error popup
+            showPopup(
+              error.message || "Error creating account. Please try again."
+            );
+          }
+        });
+    </script>
   </body>
 </html>
