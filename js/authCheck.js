@@ -23,6 +23,6 @@ const auth = getAuth(app);
 onAuthStateChanged(auth, (user) => {
   if (!user) {
     // If no user is logged in, redirect to sign-up page
-    window.location.href = "/authentication/sign-up.html";
+    window.location.href = "/authentication/sign-in.html";
   }
 });
