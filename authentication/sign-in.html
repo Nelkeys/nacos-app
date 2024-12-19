@@ -129,7 +129,6 @@
       // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
-      const db = getFirestore(app);
 
       // Show Popup with Message
       function showPopup(message) {
@@ -158,19 +157,27 @@
             );
             const user = userCredential.user;
 
-            // Fetch user details from Firestore using user.uid
-            const userDocRef = doc(db, "users", user.uid);
-            const userDocSnap = await getDoc(userDocRef);
+            // Fetch user data from Firestore using the user's UID
+            const db = getFirestore(app); // Initialize Firestore
+            const userRef = doc(db, "users", user.uid); // Reference to the user's document in the "users" collection
+            const userDoc = await getDoc(userRef); // Fetch the document
 
-            if (userDocSnap.exists()) {
-              const userData = userDocSnap.data();
-              const fullName = userData.fullName;
+            if (userDoc.exists()) {
+              const userData = userDoc.data(); // Get the data from the Firestore document
+
+              // Extract user data from Firestore document
+              const fullName = userData.fullName || "User"; // Default to "User" if fullName is not found
+              const regNumber = userData.regNumber || "Not Available"; // Default to "Not Available" if regNumber is not found
+
+              // Log the data
+              console.log("User data from Firestore:", userData);
 
               // Save user session to localStorage
               const sessionData = {
                 uid: user.uid,
                 email: user.email,
-                fullName: fullName, // Store full name as well
+                fullName: fullName, // Full name from Firestore (or default value)
+                regNumber: regNumber, // Registration number from Firestore (or default value)
               };
               localStorage.setItem("userSession", JSON.stringify(sessionData));
 
@@ -182,7 +189,23 @@
                 window.location.href = "/"; // Redirect to dashboard
               }, 3000);
             } else {
-              throw new Error("User data not found!");
+              // Proceed with login even if user data doesn't exist in Firestore
+              console.log("User data not found in Firestore, proceeding with login.");
+              const sessionData = {
+                uid: user.uid,
+                email: user.email,
+                fullName: "User", // Default to "User" if data is not available
+                regNumber: "Not Available", // Default to "Not Available"
+              };
+              localStorage.setItem("userSession", JSON.stringify(sessionData));
+
+              // Show success popup
+              showPopup("Login successful! Redirecting...");
+
+              // Redirect to dashboard
+              setTimeout(() => {
+                window.location.href = "/"; // Redirect to dashboard
+              }, 3000);
             }
           } catch (error) {
             console.error("Error logging in:", error);
