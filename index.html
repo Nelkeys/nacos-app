@@ -5,20 +5,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
-
-    <script type="module" src="/js/index.js"></script>
-    <script type="module" src="/js/firebase.js"></script>
-
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <script src="/js/authCheck.js" type="module"></script>
+
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="css/style.css" />
+
+    <script type="module" src="/js/main.js"></script>
+    <script src="/js/authCheck.js" type="module"></script>
+    <script
+      src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js"
+      defer
+    ></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function (OneSignal) {
+        await OneSignal.init({
+          appId: "c13ae95e-992d-4932-af4a-9dede5017499",
+        });
+      });
+    </script>
+
     <title>NACOS App</title>
   </head>
   <body class="text-gray-800">
